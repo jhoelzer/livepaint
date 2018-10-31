@@ -5,7 +5,7 @@ function Bitmap(width, height) {
         row_arr.fill("white");
         this.grid.push(row_arr);
     }
-}
+};
 
 Bitmap.prototype.render = function(target_element) {
     this.cells = [];
@@ -31,8 +31,13 @@ Bitmap.prototype.render = function(target_element) {
 Bitmap.prototype.setColor = function(row, col, color) {
     this.grid[row][col] = color;
     this.cells[row][col].style.background = color;
-    clientUpdates.push([row, col, color]);
-}
+    updateQueue.push([row, col, color]);
+};
+
+Bitmap.prototype.updateColor = function (row, col, color) {
+    this.grid[row][col] = color;
+    this.cells[row][col].style.background = color;
+};
 
 Bitmap.prototype.handleEvent = function(event) {
     if(event.type === "click") {
@@ -45,8 +50,3 @@ Bitmap.prototype.handleEvent = function(event) {
         }
     }
 };
-
-Bitmap.prototype.updateColor = function (row, col, color) {
-    this.grid[row][col] = color;
-    this.cells[row][col].style.background = color;
-}
